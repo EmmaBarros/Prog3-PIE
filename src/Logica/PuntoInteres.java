@@ -88,9 +88,10 @@ public abstract class PuntoInteres {
         this.nivelAcces = nivelAcces;
     }
 
-    @Override
-    public String toString() {
-        return "PuntoInteres{" + "nivAccesval=" + nivAccesVal + ", codigo=" + codigo + ", nombre=" + nombre + ", altitud=" + altitud + ", nivelAcces=" + nivelAcces + '}';
-    }
+  @Override
+public String toString() {
+    return String.format("Código: %d | Nombre: %s | Altitud: %.2f m | Accesibilidad: %s", 
+            codigo, nombre, altitud, getNivelAcces());
+}
 
 }
