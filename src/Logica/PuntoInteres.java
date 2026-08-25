@@ -30,6 +30,7 @@ public abstract class PuntoInteres {
     }
     //carga y lectura
 
+<<<<<<< HEAD
     public void cargarDatos() throws DatoInvalidoException {
         leerCodigo();
         leerNombre();
@@ -47,6 +48,9 @@ public abstract class PuntoInteres {
             throw new DatoInvalidoException("el codigo no puede ser negativo");
 
         }
+=======
+    public PuntoInteres(int codigo, String nombre, double altitud, int nivelAcces) throws DatoInvalidoException{
+>>>>>>> 78bec90202d021c9726414f5439327cce007f8de
         setCodigo(codigo);
     }
 
