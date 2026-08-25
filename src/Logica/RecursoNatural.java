@@ -53,7 +53,7 @@ public class RecursoNatural extends PuntoInteres {
     @Override
     public String toString() {
         return String.format("Tipo: %s | Código: %d | Nombre: %s | Altitud: %.2f m | Accesibilidad: %s | Categoría: %s",
-                obtenerTipo(), codigo, nombre, altitud, getNivelAccesText(), getCategoria());
+                obtenerTipo(), codigo, nombre, altitud, getNivelAcces(), getCategoria());
     }
     
         

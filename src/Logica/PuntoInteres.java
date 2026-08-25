@@ -27,7 +27,7 @@ public abstract class PuntoInteres {
         this.nivelAcces = 0;
     }
 
-    public PuntoInteres(int codigo, String nombre, double altitud, int nivelAcces) {
+    public PuntoInteres(int codigo, String nombre, double altitud, int nivelAcces) throws DatoInvalidoException{
         setCodigo(codigo);
         setNombre(nombre);
         setAltitud(altitud);
