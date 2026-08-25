@@ -1,12 +1,14 @@
 package Logica;
-import Utilidades.Validador;
+
+import Utilidades.*;
+
 /**
  *
  * @author emami
  */
 public class RecursoNatural extends PuntoInteres {
 
-    private String[] catText = {"Cascada", "Laguna", "Bosque", "Formacion Rocosa"};
+    private final String[] catText = {"Cascada", "Laguna", "Bosque", "Formacion Rocosa"};
     private int categoria;
 
     public RecursoNatural() {
@@ -14,29 +16,38 @@ public class RecursoNatural extends PuntoInteres {
         this.categoria = 0;
     }
 
-    public RecursoNatural(int codigo, String nombre, double altitud, int nivelAcces,int categoria)throws DatoInvalidoException {
-        super(codigo, nombre, altitud, nivelAcces);
-        setCategoria(categoria);
+    @Override
+    public void cargarDatos() throws DatoInvalidoException {
+        super.cargarDatos();
+        leerCategoria();
+
     }
-    
-    
+
+    private void leerCategoria() throws DatoInvalidoException {
+        int cat;
+        Consola.emitirMensajeLN("ingrese la categoria ");
+        Consola.emitirLista(catText);
+        cat = Lector.leerInt();
+        if (!Validador.esNroValido(cat, 1, catText.length)) {
+            throw new DatoInvalidoException("numero de categoria invalio");
+        }
+        setCategoria(cat);
+    }
 
     public String[] getCatText() {
         return catText;
     }
 
-    private void setCatText(String[] catText) {
-        this.catText = catText;
-    }
+   
 
     public String getCategoria() {
-        return catText[categoria-1];
+        if(this.categoria < 1 || this.categoria > catText.length){
+            return "Sin Definir";
+        }
+        return catText[categoria - 1];
     }
 
-    private void setCategoria(int categoria) throws DatoInvalidoException {
-        if(!Validador.esNroValido(categoria, 1, catText.length)){
-            throw new DatoInvalidoException("La categoria debe estar entre 1-2-3-4");
-        }
+    private void setCategoria(int categoria) {
         this.categoria = categoria;
     }
 
@@ -49,12 +60,11 @@ public class RecursoNatural extends PuntoInteres {
     public String obtenerTipo() {
         return "Recurso Natural";
     }
-    
+
     @Override
     public String toString() {
         return String.format("Tipo: %s | Código: %d | Nombre: %s | Altitud: %.2f m | Accesibilidad: %s | Categoría: %s",
-                obtenerTipo(), codigo, nombre, altitud, getNivelAccesText(), getCategoria());
+                obtenerTipo(), codigo, nombre, altitud, getNivelAcces(), getCategoria());
     }
-    
-        
+
 }

@@ -5,7 +5,9 @@
  */
 package Logica;
 
+import Utilidades.Consola;
 import Utilidades.Validador;
+import Utilidades.Lector;
 
 /**
  *
@@ -26,12 +28,63 @@ public abstract class PuntoInteres {
         this.altitud = 0;
         this.nivelAcces = 0;
     }
+    //carga y lectura
 
-    public PuntoInteres(int codigo, String nombre, double altitud, int nivelAcces) {
+    public void cargarDatos() throws DatoInvalidoException {
+        leerCodigo();
+        leerNombre();
+        leerAltitud();
+        leerNivelAcces();
+    }
+
+    private void leerCodigo() throws DatoInvalidoException {
+        int codigo;
+
+        Consola.emitirMensajeLN("ingrese el codigo :");
+        codigo = Lector.leerInt();
+
+        if (!Validador.esNroPositivo(codigo) || codigo == 0) {
+            throw new DatoInvalidoException("el codigo no puede ser negativo");
+
+        }
         setCodigo(codigo);
+    }
+
+    private void leerNombre() throws DatoInvalidoException {
+        String nombre;
+
+        Consola.emitirMensajeLN("ingrese el nombre :");
+        nombre = Lector.leerString();
+
+        if (Validador.esStringVacio(nombre)) {
+            throw new DatoInvalidoException("el nombre no debe ser vacio...");
+        }
         setNombre(nombre);
+    }
+
+    private void leerAltitud() throws DatoInvalidoException {
+        double altitud;
+
+        Consola.emitirMensajeLN("ingrese la altitud s. Niv/mar");
+        altitud = Lector.leerDouble();
+
+        if (!Validador.esDecimalPositivo(altitud)) {
+            throw new DatoInvalidoException("la altitud debe ser positiva");
+        }
         setAltitud(altitud);
-        setNivelAcces(nivelAcces);
+    }
+
+    private void leerNivelAcces() throws DatoInvalidoException {
+        int nivel;
+
+        Consola.emitirMensajeLN("ingrese el nivel de acceso");
+        Consola.emitirLista(nivAccesVal);
+        nivel = Lector.leerInt();
+        if (!Validador.esNroValido(nivel, 1, nivAccesVal.length)) {
+            throw new DatoInvalidoException("opcion de nivel de acceso invalida");
+        }
+        setNivelAcces(nivel);
+
     }
 
     public boolean esMismoCodigo(int codB) {
@@ -48,50 +101,40 @@ public abstract class PuntoInteres {
         return codigo;
     }
 
-    private void setCodigo(int codigo) throws DatoInvalidoException {
-        if (!Validador.esNroPositivo(codigo)) {
-            throw new DatoInvalidoException("el codigo debe ser positivo...");
-        }
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setAltitud(double altitud) {
+        this.altitud = altitud;
+    }
+
+    public void setNivelAcces(int nivelAcces) {
+        this.nivelAcces = nivelAcces;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    private void setNombre(String nombre) throws DatoInvalidoException {
-        if (!Validador.esStringVacio(nombre)) {
-            throw new DatoInvalidoException("el nombre no debe ser vacio...");
-        }
-        this.nombre = nombre;
-    }
-
     public double getAltitud() {
         return altitud;
     }
 
-    private void setAltitud(double altitud) throws DatoInvalidoException {
-        if (!Validador.esDecimalPositivo(altitud)) {
-            throw new DatoInvalidoException("la altitud no puede ser positiva...");
+ public String getNivelAcces() {
+        if (this.nivelAcces < 1 || this.nivelAcces > nivAccesVal.length) {
+            return "Sin definir";
         }
-        this.altitud = altitud;
-    }
-
-    public String getNivelAcces() {
         return nivAccesVal[this.nivelAcces - 1];
+ }
+    @Override
+    public String toString() {
+        return String.format("Código: %d | Nombre: %s | Altitud: %.2f m | Accesibilidad: %s",
+                codigo, nombre, altitud, getNivelAcces());
     }
-
-    private void setNivelAcces(int nivelAcces) throws DatoInvalidoException {
-        if (!Validador.esNroValido(nivelAcces, 1, 5)) {
-            throw new DatoInvalidoException("nivel de acceso invalido...");
-        }
-        this.nivelAcces = nivelAcces;
-    }
-
-  @Override
-public String toString() {
-    return String.format("Código: %d | Nombre: %s | Altitud: %.2f m | Accesibilidad: %s", 
-            codigo, nombre, altitud, getNivelAcces());
-}
 
 }

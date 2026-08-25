@@ -5,7 +5,7 @@
  */
 package Logica;
 
-import Utilidades.Validador;
+import Utilidades.*;
 
 /**
  *
@@ -13,7 +13,7 @@ import Utilidades.Validador;
  */
 public class Mirador extends PuntoInteres {
 
-    private String[] tipoVistaText = {"Panoramica", "Paisaje", "Fauna"};
+    private final String[] tipoVistaText = {"Panoramica", "Paisaje", "Fauna"};
     private int tipoVista;
 
     public Mirador() {
@@ -21,8 +21,22 @@ public class Mirador extends PuntoInteres {
         this.tipoVista = 0;
     }
 
-    public Mirador(int tipoVista, int codigo, String nombre, double altitud, int nivelAcces) {
-        super(codigo, nombre, altitud, nivelAcces);
+    @Override
+    public void cargarDatos() throws DatoInvalidoException {
+        super.cargarDatos();
+        leerTipoVista();
+
+    }
+
+    private void leerTipoVista() throws DatoInvalidoException {
+        int tipoVista;
+        Consola.emitirMensajeLN("ingrese el tipo de Vista");
+        Consola.emitirLista(tipoVistaText);
+        tipoVista = Lector.leerInt();
+
+        if (!Validador.esNroValido(tipoVista, 1, tipoVistaText.length)) {
+            throw new DatoInvalidoException("tipo de vista invalido");
+        }
         setTipoVista(tipoVista);
     }
 
@@ -30,18 +44,15 @@ public class Mirador extends PuntoInteres {
         return tipoVistaText;
     }
 
-    private void setTipoVistaText(String[] tipoVistaText) throws DatoInvalidoException {
-        this.tipoVistaText = tipoVistaText;
-    }
-
     public String getTipoVista() {
+        if (this.tipoVista < 1 || this.tipoVista > tipoVistaText.length) {
+            return "Sin definir";
+        }
         return tipoVistaText[this.tipoVista - 1];
     }
 
-    private void setTipoVista(int tipoVista) throws DatoInvalidoException {
-        if (!Validador.esNroValido(tipoVista, 1, tipoVistaText.length)) {
-            throw new DatoInvalidoException("el tipo de vista debe estar entre 1-2-3");
-        }
+    private void setTipoVista(int tipoVista) {
+
         this.tipoVista = tipoVista;
     }
 
@@ -55,10 +66,9 @@ public class Mirador extends PuntoInteres {
         return "Mirador";
     }
 
-   @Override
+    @Override
     public String toString() {
-        return String.format("Código: %d | Nombre: %s | Altitud: %.2f m | Accesibilidad: %s | Vista: %s",
-                codigo, nombre, altitud, getNivelAcces(), getTipoVistaText());
+        return String.format("Tipo: %s | Código: %d | Nombre: %s | Altitud: %.2f m | Accesibilidad: %s | Vista: %s",
+                obtenerTipo(), codigo, nombre, altitud, getNivelAcces(), getTipoVista());
     }
-
 }
