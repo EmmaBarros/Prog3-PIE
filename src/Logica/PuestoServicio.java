@@ -1,55 +1,13 @@
-<<<<<<< HEAD
+package Logica;
 
-package Logica;
 import Utilidades.*;
-=======
-package Logica;
 
 import Utilidades.Validador;
 
->>>>>>> 78bec90202d021c9726414f5439327cce007f8de
 /**
  *
  * @author emami
  */
-<<<<<<< HEAD
-public class PuestoServicio extends PuntoInteres{
-    private final String[] tipoText = {"guarda parques","primeros auxilios","informacion al visitante"};
-    private int tipoServicio;
-
-    public PuestoServicio() {
-        super();
-        this.tipoServicio = 0;
-    }
-
-    @Override
-    public void cargarDatos() throws DatoInvalidoException {
-        super.cargarDatos();
-        leerTipoServicio();
-    }
-    private void leerTipoServicio() throws DatoInvalidoException {
-        int tipo;
-        Consola.emitirMensajeLN("ingrese el tipo de servicio");
-        Consola.emitirLista(tipoText);
-        tipo = Lector.leerInt();
-        if(!Validador.esNroValido(tipo, 1, tipoText.length)){
-            throw new DatoInvalidoException("tipo de servicio invalido");
-        }
-        setTipoServicio(tipo);
-    }
-
-    public String getTipoServicio() {
-        if(this.tipoServicio < 1 || this.tipoServicio > tipoText.length){
-            return "Sin definir";
-        }
-        return tipoText[tipoServicio-1];
-    }
-
-    private void setTipoServicio(int tipoServicio) {
-        this.tipoServicio = tipoServicio;
-    }
-    
-=======
 public class PuestoServicio extends PuntoInteres {
 
     private int tipoServ;
@@ -59,43 +17,51 @@ public class PuestoServicio extends PuntoInteres {
         super();
         this.tipoServ = 0;
     }
-
-    public PuestoServicio(int tipoServ, int codigo, String nombre, double altitud, int nivelAcces) throws DatoInvalidoException{
-        super(codigo, nombre, altitud, nivelAcces);
-        setTipoServ(tipoServ);
+    
+    @Override
+    public void cargarDatos() throws DatoInvalidoException {
+        super.cargarDatos();
+        leerTipoServ();
     }
->>>>>>> 78bec90202d021c9726414f5439327cce007f8de
+
+    private void leerTipoServ() throws DatoInvalidoException {
+        int serv;
+        Consola.emitirMensajeLN("Ingrese el tipo de servicio:");
+        Consola.emitirLista(tipoServText);
+        serv = Lector.leerInt();
+
+        if (!Validador.esNroValido(serv, 1, tipoServText.length)) {
+            throw new DatoInvalidoException("El rango de tipo de Servicio debe estar entre 1-2-3 ...");
+        }
+        setTipoServ(serv);
+    }
 
     @Override
     public void mostrarInformacion() {
         System.out.println(toString());
     }
 
-    @Override
+    public String getTipoServicio() {
+        if (this.tipoServ < 1 || this.tipoServ > tipoServText.length) {
+            return "Sin definir";
+        }
+        return tipoServText[tipoServ - 1];
+    }
+
+    private void setTipoServ(int tipoServ) throws DatoInvalidoException {
+        if (!Validador.esNroValido(tipoServ, 1, 3)) {
+            throw new DatoInvalidoException("el rango de tipo de Servicio debe estar entre 1-2-3 ...");
+        }
+        this.tipoServ = tipoServ;
+    }
+      @Override
     public String obtenerTipo() {
         return "Puesto de Servicio";
     }
-<<<<<<< HEAD
     @Override
 public String toString() {
     return String.format("Tipo: %s | Código: %d | Nombre: %s | Altitud: %.2f m | Accesibilidad: %s | Servicio: %s",
             obtenerTipo(), codigo, nombre, altitud, getNivelAcces(), getTipoServicio());
 }
-    
-    
-    
-=======
 
-    public String getTipoServ() {
-        return tipoServText[tipoServ-1];
-    }
-
-    private void setTipoServ(int tipoServ) throws DatoInvalidoException {
-        if(!Validador.esNroValido(tipoServ, 1, 3)){
-            throw new DatoInvalidoException("el rango de tipo de Servicio debe estar entre 1-2-3 ...");
-        }
-        this.tipoServ = tipoServ;
-    }
-
->>>>>>> 78bec90202d021c9726414f5439327cce007f8de
 }
