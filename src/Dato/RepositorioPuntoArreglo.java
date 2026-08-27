@@ -46,13 +46,18 @@ public class RepositorioPuntoArreglo implements RepositorioPuntoInteres{
 
     @Override
     public PuntoInteres buscarPorCodigo(int codigo) {
-        for (int i = 0; i < cant; i++) {
-            if(punto[i].esMismoCodigo(codigo)){
-                return punto[i];
-            }
-        }
-        return null;
+        return buscarPorCodigoRecursivo(codigo,0);
     }
+    private PuntoInteres buscarPorCodigoRecursivo(int codigo,int posicion){
+        if (posicion >= cant) {
+            return null;//caso base no se encuentra en el arreglo
+        }
+        if (punto[posicion].getCodigo() == codigo) {
+            return punto[posicion];//caso base que se encuentra e lobjeto
+        }
+        return buscarPorCodigoRecursivo(codigo,posicion+1);
+    }
+    
 
     @Override
     public int cantidad() {
