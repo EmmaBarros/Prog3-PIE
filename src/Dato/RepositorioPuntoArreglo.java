@@ -1,7 +1,10 @@
-
+    
 package Dato;
 
+import Logica.CodigoDuplicadoException;
 import Logica.PuntoInteres;
+import Logica.RepositorioLlenoException;
+
 
 /**
  *
@@ -17,11 +20,20 @@ public class RepositorioPuntoArreglo implements RepositorioPuntoInteres{
     }
 
     @Override
-    public void agregar(PuntoInteres nuevopunto) {
-        if(!estaLleno()){
-            punto[cant] = nuevopunto;
-            cant++;
+    public void agregar(PuntoInteres nuevoPunto) throws RepositorioLlenoException,CodigoDuplicadoException {
+        if (estaLleno()) {
+            throw new RepositorioLlenoException("el repositorio esta lleno");
         }
+        if (existeCodigo(nuevoPunto.getCodigo())) {
+            throw new CodigoDuplicadoException("ya existe un punto registrado");
+        }
+        punto[cant] = nuevoPunto;
+        cant ++;
+    }
+    
+    @Override
+    public boolean existeCodigo(int codigo){
+        return buscarPorCodigo(codigo) != null;
     }
 
     @Override
