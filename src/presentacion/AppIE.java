@@ -103,7 +103,7 @@ public class AppIE {
                     int codigo = leerCodigo(); // Lanza DatoInvalidoException si es negativo/cero
 
                     if (gestor.exsiteCodigo(codigo)) {
-                        throw new CodigoDuplicadoException("El código " + codigo + " ya existe en el sistema.");
+                        throw new CodigoDuplicadoException("El codigo " + codigo + " ya existe en el sistema.");
                     }
 
                     // Se le pasa el código validado y recién se le piden los demás datos
@@ -117,7 +117,7 @@ public class AppIE {
 
             // Se guarda en el repositorio
             gestor.registrarPuntoInteres(p);
-            Consola.emitirMensajeLN("¡Punto de interés guardado correctamente!");
+            Consola.emitirMensajeLN("¡Punto de interes guardado correctamente!");
 
         } catch (RepositorioLlenoException e) {
             Consola.emitirError(e.getMessage());
