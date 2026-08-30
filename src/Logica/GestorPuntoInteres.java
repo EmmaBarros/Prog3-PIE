@@ -128,7 +128,7 @@ valida la duplicidad y agrega
         }
         PuntoInteres actual = repositorio.obtener(posicion);//Se obtiene el elemento
         int cuenta = 0;
-        if (actual != null & actual.esAccesibilidadAlta()) {
+        if (actual != null && actual.esAccesibilidadAlta()) {
             cuenta = 1;
         }
         return cuenta + contarAccesAltaRecursivo(posicion +1);//retorna la cuenta de puntos 
