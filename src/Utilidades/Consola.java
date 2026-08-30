@@ -1,6 +1,18 @@
 package Utilidades;
 
 public class Consola {
+    public static void emitirResultado(int tamaño, String estilo, String msj){
+        Consola.emitirMensajeLN("");
+        
+        Consola.emitirBordeLN(tamaño, estilo);
+        Consola.emitirMensajeLN(msj);
+        Consola.emitirBordeLN(tamaño, estilo);
+    }
+    
+    public static void emitirResultado(int tamaño, String estilo, String msj, Object resultado){
+        
+    }
+    
     public static void emitirMensaje(String msj){
         System.out.print(msj);
     }
@@ -45,6 +57,7 @@ public class Consola {
     */
     public static void emitirTitulo(int bordeIzq, int anchoTotal, String estilo, String texto){
         int bordeDer = ( ( anchoTotal - texto.length() ) - 2 ) - bordeIzq;
+        System.out.println("");
         
         emitirBorde(bordeIzq, estilo);
 

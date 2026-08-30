@@ -27,7 +27,18 @@ valida la duplicidad y agrega
     public boolean exsiteCodigo(int codigo) {
         return repositorio.existeCodigo(codigo);
     }
-
+    
+    public void estaVacio()throws RepositorioVacioException{
+        if(repositorio.estaVacio()){
+            throw new RepositorioVacioException("no hay puntos de interese cargados");
+        }
+    }
+    public void estaLleno()throws RepositorioLlenoException{
+        if (repositorio.estaLleno()) {
+            throw new RepositorioLlenoException("no queda mas espacio");
+        }
+    }
+    
     /*func.2 metodo de muestra que utiliza otro mostrar con recorrido recursivo
      */
     public void mostrarPuntos() {
@@ -115,8 +126,12 @@ valida la duplicidad y agrega
         if (posicion >= repositorio.cantidad()) {
             return 0; // caso base si se llega al final
         }
-        PuntoInteres actual = repositorio.obtener(posicion);
+        PuntoInteres actual = repositorio.obtener(posicion);//Se obtiene el elemento
         int cuenta = 0;
+        if (actual != null & actual.esAccesibilidadAlta()) {
+            cuenta = 1;
+        }
+        return cuenta + contarAccesAltaRecursivo(posicion +1);//retorna la cuenta de puntos 
     }
 
 }

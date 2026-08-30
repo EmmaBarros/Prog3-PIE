@@ -31,25 +31,14 @@ public abstract class PuntoInteres {
     //carga y lectura
 
 
-    public void cargarDatos() throws DatoInvalidoException {
-        leerCodigo();
+    public void cargarDatos(int codVal) throws DatoInvalidoException {
+        setCodigo(codVal);
         leerNombre();
         leerAltitud();
         leerNivelAcces();
     }
 
-    private void leerCodigo() throws DatoInvalidoException {
-        int codigo;
-
-        Consola.emitirMensajeLN("ingrese el codigo :");
-        codigo = Lector.leerInt();
-
-        if (!Validador.esNroPositivo(codigo) || codigo == 0) {
-            throw new DatoInvalidoException("el codigo no puede ser negativo");
-
-        }
-    }
-
+   
    
 
     private void leerNombre() throws DatoInvalidoException {
@@ -93,6 +82,9 @@ public abstract class PuntoInteres {
     public boolean esMismoCodigo(int codB) {
         return this.codigo == codB;
     }
+    public boolean esAccesibilidadAlta(){
+        return this.nivelAcces == 0 || this.nivelAcces == 1;
+    }
 
     //metodos abstractos
     public abstract void mostrarInformacion();
@@ -104,7 +96,10 @@ public abstract class PuntoInteres {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+  public void setCodigo(int codigo) throws DatoInvalidoException {
+        if (!Validador.esNroPositivo(codigo) || codigo == 0) {
+            throw new DatoInvalidoException("El código debe ser un número positivo mayor a cero.");
+        }
         this.codigo = codigo;
     }
 

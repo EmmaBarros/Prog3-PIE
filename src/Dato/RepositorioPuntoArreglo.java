@@ -61,13 +61,16 @@ public class RepositorioPuntoArreglo implements RepositorioPuntoInteres{
 
     @Override
     public int cantidad() {
-        return cant;
+    return cant;
     }
 
     @Override
     public boolean estaLleno() {
         return cant == punto.length;
         }
-    
+    @Override 
+    public boolean estaVacio(){
+        return cant == 0;
+    }
     
 }

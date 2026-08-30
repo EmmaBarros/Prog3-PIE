@@ -17,8 +17,8 @@ public class RecursoNatural extends PuntoInteres {
     }
 
     @Override
-    public void cargarDatos() throws DatoInvalidoException {
-        super.cargarDatos();
+    public void cargarDatos(int codVal) throws DatoInvalidoException {
+        super.cargarDatos(codVal);
         leerCategoria();
 
     }

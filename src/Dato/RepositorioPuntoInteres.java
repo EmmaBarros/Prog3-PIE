@@ -15,4 +15,5 @@ public interface RepositorioPuntoInteres {
     boolean existeCodigo(int codigo);
     int cantidad();
     boolean estaLleno();
+    boolean estaVacio();
 }
