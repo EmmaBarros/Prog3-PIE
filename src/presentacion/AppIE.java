@@ -10,7 +10,7 @@ import Utilidades.*;
  * @author emami
  */
 public class AppIE {
-
+    private final LectorPuntoInteres lectorPunto = new LectorPuntoInteres();
     private final GestorPuntoInteres gestor;
     private Menu menu;
     private final MenuEcuRoute menuEcRou;
@@ -107,7 +107,7 @@ public class AppIE {
                     }
 
                     // Se le pasa el código validado y recién se le piden los demás datos
-                    p.cargarDatos(codigo); 
+                    lectorPunto.cargarPunto(p, codigo, tipoPuntInteres);
                     objCargado = true;
 
                 } catch (CodigoDuplicadoException | DatoInvalidoException e) {

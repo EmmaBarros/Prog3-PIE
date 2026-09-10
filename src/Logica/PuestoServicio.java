@@ -17,25 +17,7 @@ public class PuestoServicio extends PuntoInteres {
         super();
         this.tipoServ = 0;
     }
-    
-    @Override
-    public void cargarDatos(int codVal) throws DatoInvalidoException {
-        super.cargarDatos(codVal);
-        leerTipoServ();
-    }
-
-    private void leerTipoServ() throws DatoInvalidoException {
-        int serv;
-        Consola.emitirMensajeLN("Ingrese el tipo de servicio:");
-        Consola.emitirLista(tipoServText);
-        serv = Lector.leerInt();
-
-        if (!Validador.esNroValido(serv, 1, tipoServText.length)) {
-            throw new DatoInvalidoException("El rango de tipo de Servicio debe estar entre 1-2-3 ...");
-        }
-        setTipoServ(serv);
-    }
-
+   
     @Override
     public void mostrarInformacion() {
         System.out.println(toString());
@@ -48,7 +30,12 @@ public class PuestoServicio extends PuntoInteres {
         return tipoServText[tipoServ - 1];
     }
 
-    private void setTipoServ(int tipoServ) throws DatoInvalidoException {
+    public String[] getTipoServText() {
+        return tipoServText;
+    }
+    
+
+    public void setTipoServ(int tipoServ) throws DatoInvalidoException {
         if (!Validador.esNroValido(tipoServ, 1, 3)) {
             throw new DatoInvalidoException("el rango de tipo de Servicio debe estar entre 1-2-3 ...");
         }

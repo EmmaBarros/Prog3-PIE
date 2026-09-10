@@ -21,25 +21,6 @@ public class Mirador extends PuntoInteres {
         this.tipoVista = 0;
     }
 
-    @Override
-    public void cargarDatos(int codVal) throws DatoInvalidoException {
-        super.cargarDatos(codVal);
-        leerTipoVista();
-
-    }
-
-    private void leerTipoVista() throws DatoInvalidoException {
-        int tipoVista;
-        Consola.emitirMensajeLN("ingrese el tipo de Vista");
-        Consola.emitirLista(tipoVistaText);
-        tipoVista = Lector.leerInt();
-
-        if (!Validador.esNroValido(tipoVista, 1, tipoVistaText.length)) {
-            throw new DatoInvalidoException("tipo de vista invalido");
-        }
-        setTipoVista(tipoVista);
-    }
-
     public String[] getTipoVistaText() {
         return tipoVistaText;
     }
@@ -51,8 +32,10 @@ public class Mirador extends PuntoInteres {
         return tipoVistaText[this.tipoVista - 1];
     }
 
-    private void setTipoVista(int tipoVista) {
-
+    public void setTipoVista(int tipoVista) throws DatoInvalidoException {
+        if (!Validador.esNroValido(tipoVista, 1, tipoVistaText.length)) {
+            throw new DatoInvalidoException("tipo de vista invalido..");
+        }
         this.tipoVista = tipoVista;
     }
 

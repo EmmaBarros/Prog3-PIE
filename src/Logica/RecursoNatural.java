@@ -16,24 +16,7 @@ public class RecursoNatural extends PuntoInteres {
         this.categoria = 0;
     }
 
-    @Override
-    public void cargarDatos(int codVal) throws DatoInvalidoException {
-        super.cargarDatos(codVal);
-        leerCategoria();
-
-    }
-
-    private void leerCategoria() throws DatoInvalidoException {
-        int cat;
-        Consola.emitirMensajeLN("ingrese la categoria ");
-        Consola.emitirLista(catText);
-        cat = Lector.leerInt();
-        if (!Validador.esNroValido(cat, 1, catText.length)) {
-            throw new DatoInvalidoException("numero de categoria invalio");
-        }
-        setCategoria(cat);
-    }
-
+    
     public String[] getCatText() {
         return catText;
     }
@@ -47,7 +30,10 @@ public class RecursoNatural extends PuntoInteres {
         return catText[categoria - 1];
     }
 
-    private void setCategoria(int categoria) {
+    public void setCategoria(int categoria) throws DatoInvalidoException {
+        if (!Validador.esNroValido(categoria, 1, catText.length)) {
+            throw new DatoInvalidoException("numero de categoria invalido...");
+        }
         this.categoria = categoria;
     }
 
