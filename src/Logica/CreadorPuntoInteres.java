@@ -1,5 +1,7 @@
 package Logica;
 
+import Excepciones.DatoInvalidoException;
+
 public class CreadorPuntoInteres {
     /**
      * Crea una instancia del tipo de punto de interés correspondiente

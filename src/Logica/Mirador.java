@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import Excepciones.DatoInvalidoException;
 import Utilidades.*;
 
 /**

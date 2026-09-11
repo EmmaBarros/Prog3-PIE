@@ -1,5 +1,8 @@
 package Logica;
 
+import Excepciones.CodigoDuplicadoException;
+import Excepciones.RepositorioLlenoException;
+import Excepciones.RepositorioVacioException;
 import Dato.RepositorioPuntoInteres;
 
 /**

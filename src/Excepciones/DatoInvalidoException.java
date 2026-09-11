@@ -1,4 +1,4 @@
-package Logica;
+package Excepciones;
 
 public class DatoInvalidoException extends IllegalArgumentException{
     public DatoInvalidoException(String msg) {

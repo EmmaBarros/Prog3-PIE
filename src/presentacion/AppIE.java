@@ -1,5 +1,9 @@
 package presentacion;
 
+import Excepciones.CodigoDuplicadoException;
+import Excepciones.RepositorioLlenoException;
+import Excepciones.RepositorioVacioException;
+import Excepciones.DatoInvalidoException;
 import Dato.RepositorioPuntoArreglo;
 import Dato.RepositorioPuntoInteres;
 import Logica.*;

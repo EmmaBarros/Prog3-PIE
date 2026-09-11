@@ -5,13 +5,14 @@
  */
 package Logica;
 
+import Excepciones.DatoInvalidoException;
 import Utilidades.Validador;
 
 /**
  *
  * @author emami
  */
-public abstract class PuntoInteres {
+public abstract class PuntoInteres implements Comparable<PuntoInteres> {
 
     private final String[] nivAccesVal = {"muy dificil", "dificl", "moderado", "facil"};
 
@@ -92,6 +93,11 @@ public abstract class PuntoInteres {
         }
         return nivAccesVal[this.nivelAcces - 1];
     }
+    
+  @Override
+    public int compareTo(PuntoInteres otro) {
+        return Integer.compare(this.codigo, otro.codigo);
+    }  
 
     @Override
     public String toString() {

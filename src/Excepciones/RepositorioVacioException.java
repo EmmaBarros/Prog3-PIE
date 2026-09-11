@@ -1,4 +1,4 @@
-package Logica;
+package Excepciones;
 
 public class RepositorioVacioException extends IllegalArgumentException{
     public RepositorioVacioException(String msg) {

@@ -1,5 +1,6 @@
 package presentacion;
 
+import Excepciones.DatoInvalidoException;
 import Logica.*;
 import Utilidades.Consola;
 import Utilidades.Lector;
