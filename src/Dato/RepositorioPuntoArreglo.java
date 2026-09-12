@@ -1,9 +1,9 @@
     
 package Dato;
 
-import Excepciones.CodigoDuplicadoException;
+import Logica.Excepciones.CodigoDuplicadoException;
 import Logica.PuntoInteres;
-import Excepciones.RepositorioLlenoException;
+import Logica.Excepciones.RepositorioLlenoException;
 
 
 /**

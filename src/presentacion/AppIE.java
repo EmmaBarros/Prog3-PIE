@@ -1,12 +1,15 @@
 package presentacion;
 
-import Excepciones.CodigoDuplicadoException;
-import Excepciones.RepositorioLlenoException;
-import Excepciones.RepositorioVacioException;
-import Excepciones.DatoInvalidoException;
+import Logica.Gestor.GestorArbolABB;
+import Logica.Gestor.GestorPuntoInteres;
+import Logica.Excepciones.CodigoDuplicadoException;
+import Logica.Excepciones.RepositorioLlenoException;
+import Logica.Excepciones.RepositorioVacioException;
+import Logica.Excepciones.DatoInvalidoException;
 import Dato.RepositorioPuntoArreglo;
 import Dato.RepositorioPuntoInteres;
 import Logica.*;
+import Logica.Excepciones.ArbolVacioException;
 import Utilidades.*;
 
 /**
@@ -16,14 +19,17 @@ import Utilidades.*;
 public class AppIE {
     private final LectorPuntoInteres lectorPunto = new LectorPuntoInteres();
     private final GestorPuntoInteres gestor;
+    private final GestorArbolABB gestorArbol;
     private Menu menu;
     private final MenuEcuRoute menuEcRou;
 
     public AppIE() {
         //se crea el repo del Arreglo con la instancia de la interface
         RepositorioPuntoInteres repositorio = new RepositorioPuntoArreglo();
+         //se crea el gestor del arbol (el indice)
+        this.gestorArbol = new GestorArbolABB();
         //se inyecta la dependencia desde la capa de logica 
-        this.gestor = new GestorPuntoInteres(repositorio);
+        this.gestor = new GestorPuntoInteres(repositorio,gestorArbol);
         //se prepara el menu 
         this.menuEcRou = new MenuEcuRoute();
         this.menuEcRou.cargar();
@@ -47,7 +53,7 @@ public class AppIE {
         do {
             opc = menuEcRou.ejecutar();
             procesarOp(opc);
-        } while (opc != 8);
+        } while (opc != 11);
     }
 
     private void procesarOp(int opc) {
@@ -74,7 +80,16 @@ public class AppIE {
                 case 7:
                     contarYmostrarAccesAlta();
                     break;
-                case 8:
+                    case 8:
+                construirIndice();
+                break;
+            case 9:
+                mostrarOrdenado();
+                break;
+            case 10:
+                buscarPorIndice();
+                break;
+                case 11:
                     Consola.emitirMensajeLN("Cerrando Programa ...");
                     break;
                 default:
@@ -228,4 +243,39 @@ public class AppIE {
           Consola.emitirError(e.getMessage());
       }
   }
+  //Agregado
+  private void construirIndice() {
+    gestor.construirIndice();
+    Consola.emitirMensajeLN("Indice reconstruido correctamente.");
 }
+//metodo de mostrar ordenado (por indice/ABB)
+private void mostrarOrdenado() {
+    try {
+        Consola.emitirMensajeLN("Puntos de Interes Ordenados (por codigo):");
+        gestorArbol.mostrarInOrden();
+    } catch (ArbolVacioException e) {
+        Consola.emitirError(e.getMessage());
+    }
+}
+//metodo de busqueda por indice (ABB)
+private void buscarPorIndice() {
+    try {
+        Consola.emitirMensajeLN("Buscar Punto de Interes por Indice:");
+        Consola.emitirMensajeLN("-> ingrese el codigo a buscar:");
+        int codigo = Lector.leerInt();
+
+        PuntoInteres encontrado = gestorArbol.buscarCodigo(codigo);
+        if (encontrado != null) {
+            Consola.emitirMensajeLN("Punto Encontrado!");
+            encontrado.mostrarInformacion();
+        } else {
+            Consola.emitirError("no se encontro Punto de Interes con el codigo " + codigo);
+        }
+    } catch (ArbolVacioException e) {
+        Consola.emitirError(e.getMessage());
+    }
+}
+} 
+
+  
+

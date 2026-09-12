@@ -1,6 +1,6 @@
 package Logica;
 
-import Excepciones.DatoInvalidoException;
+import Logica.Excepciones.DatoInvalidoException;
 import Utilidades.*;
 
 import Utilidades.Validador;
@@ -14,8 +14,12 @@ public class PuestoServicio extends PuntoInteres {
     private int tipoServ;
     private String[] tipoServText = {"Guarda Parques", "Primeros Auxilios", "Informacion al visitante"};
 
-    public PuestoServicio() {
+    public PuestoServicio()  {
         super();
+        this.tipoServ = 0;
+    }
+    public PuestoServicio(int codigo) {
+        super(codigo);
         this.tipoServ = 0;
     }
    

@@ -14,7 +14,12 @@ public class MenuEcuRoute {
     }
     
     public void cargar(){
-        String[] opciones = {"cargar","mostrar","buscar","contar","Mayor altitud", "Promedio altitud", "cantidad de accesibilidad alta", "Salir"};
+        String[] opciones = {
+    "cargar", "mostrar", "buscar", "contar", "Mayor altitud",
+    "Promedio altitud", "cantidad de accesibilidad alta",
+    "Construir indice", "Mostrar ordenado (indice)", "Buscar por indice",
+    "Salir"
+};
         
         menu.cargarDato("Menu Ecu Route", opciones);
     }

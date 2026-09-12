@@ -5,7 +5,7 @@
  */
 package Logica;
 
-import Excepciones.DatoInvalidoException;
+import Logica.Excepciones.DatoInvalidoException;
 import Utilidades.Validador;
 
 /**
@@ -20,6 +20,13 @@ public abstract class PuntoInteres implements Comparable<PuntoInteres> {
     protected String nombre;
     protected double altitud;
     protected int nivelAcces;
+
+    public PuntoInteres(int codigo) {
+        this.codigo = codigo;
+        this.nombre = "";
+        this.altitud = 0;
+        this.nivelAcces = 0;
+    }
 
     public PuntoInteres() {
         this.codigo = 0;
@@ -85,7 +92,6 @@ public abstract class PuntoInteres implements Comparable<PuntoInteres> {
     public String[] getNivAccesVal() {
         return nivAccesVal;
     }
-    
 
     public String getNivelAcces() {
         if (this.nivelAcces < 1 || this.nivelAcces > nivAccesVal.length) {
@@ -93,11 +99,11 @@ public abstract class PuntoInteres implements Comparable<PuntoInteres> {
         }
         return nivAccesVal[this.nivelAcces - 1];
     }
-    
-  @Override
+
+    @Override
     public int compareTo(PuntoInteres otro) {
         return Integer.compare(this.codigo, otro.codigo);
-    }  
+    }
 
     @Override
     public String toString() {

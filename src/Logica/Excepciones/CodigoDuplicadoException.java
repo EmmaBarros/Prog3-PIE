@@ -1,4 +1,4 @@
-package Excepciones;
+package Logica.Excepciones;
 
 public class CodigoDuplicadoException extends IllegalArgumentException{
     

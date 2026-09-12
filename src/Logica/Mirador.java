@@ -5,7 +5,7 @@
  */
 package Logica;
 
-import Excepciones.DatoInvalidoException;
+import Logica.Excepciones.DatoInvalidoException;
 import Utilidades.*;
 
 /**
@@ -17,8 +17,14 @@ public class Mirador extends PuntoInteres {
     private final String[] tipoVistaText = {"Panoramica", "Paisaje", "Fauna"};
     private int tipoVista;
 
+    
     public Mirador() {
         super();
+        this.tipoVista = 0;
+    }
+
+    public Mirador(int codigo) {
+        super(codigo);
         this.tipoVista = 0;
     }
 

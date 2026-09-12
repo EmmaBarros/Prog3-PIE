@@ -1,6 +1,6 @@
 package Logica;
 
-import Excepciones.DatoInvalidoException;
+import Logica.Excepciones.DatoInvalidoException;
 import Utilidades.*;
 
 /**
@@ -17,15 +17,17 @@ public class RecursoNatural extends PuntoInteres {
         this.categoria = 0;
     }
 
-    
+    public RecursoNatural(int codigo) {
+        super(codigo);
+        this.categoria = 0;
+    }
+
     public String[] getCatText() {
         return catText;
     }
 
-   
-
     public String getCategoria() {
-        if(this.categoria < 1 || this.categoria > catText.length){
+        if (this.categoria < 1 || this.categoria > catText.length) {
             return "Sin Definir";
         }
         return catText[categoria - 1];

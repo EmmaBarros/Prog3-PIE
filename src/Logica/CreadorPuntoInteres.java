@@ -1,6 +1,6 @@
 package Logica;
 
-import Excepciones.DatoInvalidoException;
+import Logica.Excepciones.DatoInvalidoException;
 
 public class CreadorPuntoInteres {
     /**
