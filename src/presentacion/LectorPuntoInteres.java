@@ -1,7 +1,10 @@
 package presentacion;
 
+import Logica.PuntoInteres.PuestoServicio;
+import Logica.PuntoInteres.RecursoNatural;
+import Logica.PuntoInteres.PuntoInteres;
+import Logica.PuntoInteres.Mirador;
 import Logica.Excepciones.DatoInvalidoException;
-import Logica.*;
 import Utilidades.Consola;
 import Utilidades.Lector;
 import Utilidades.Validador;

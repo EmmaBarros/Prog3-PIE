@@ -2,7 +2,7 @@
 package Dato;
 
 import Logica.Excepciones.CodigoDuplicadoException;
-import Logica.PuntoInteres;
+import Logica.PuntoInteres.PuntoInteres;
 import Logica.Excepciones.RepositorioLlenoException;
 
 /**

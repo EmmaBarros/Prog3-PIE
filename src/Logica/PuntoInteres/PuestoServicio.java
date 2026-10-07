@@ -1,4 +1,4 @@
-package Logica;
+package Logica.PuntoInteres;
 
 import Logica.Excepciones.DatoInvalidoException;
 import Utilidades.*;

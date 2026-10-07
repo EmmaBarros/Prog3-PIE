@@ -1,10 +1,10 @@
-package Logica.Gestor;
+package Logica;
 
 import Logica.Excepciones.CodigoDuplicadoException;
 import Logica.Excepciones.RepositorioLlenoException;
 import Logica.Excepciones.RepositorioVacioException;
 import Dato.RepositorioPuntoInteres;
-import Logica.PuntoInteres;
+import Logica.PuntoInteres.PuntoInteres;
 
 /**
  *
@@ -13,11 +13,11 @@ import Logica.PuntoInteres;
 public class GestorPuntoInteres {
 
     private final RepositorioPuntoInteres repositorio;
-    private final GestorArbolABB gestorArbol;
 
-  public GestorPuntoInteres(RepositorioPuntoInteres repositorio, GestorArbolABB gestorArbol) {
+
+  public GestorPuntoInteres(RepositorioPuntoInteres repositorio) {
     this.repositorio = repositorio;
-    this.gestorArbol = gestorArbol;
+
 }
     /*func.1
 valida la duplicidad y agrega
@@ -27,14 +27,14 @@ valida la duplicidad y agrega
             throw new CodigoDuplicadoException("el codigo " + nuevoPunto.getCodigo() + "inrgresado ya exsite");
         }
         repositorio.agregar(nuevoPunto);
-        gestorArbol.insertar(nuevoPunto);//Se agrego el insertar para sincronizar
+       
 
     }
 
     //metodo de construir para delegar al arbol
     public void construirIndice() {
         estaVacio();
-        gestorArbol.construirIndice(repositorio);
+
     }
 
     public boolean exsiteCodigo(int codigo) {

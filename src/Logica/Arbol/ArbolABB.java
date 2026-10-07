@@ -1,4 +1,6 @@
-package Logica;
+package Logica.Arbol;
+
+import Logica.Arbol.NodoABB;
 
 public class ArbolABB<T extends Comparable<T>> {
 

@@ -1,6 +1,6 @@
 package presentacion;
 
-import Logica.Menu;
+import Logica.PuntoInteres.Menu;
 
 public class MenuEcuRoute {
     private Menu menu;
