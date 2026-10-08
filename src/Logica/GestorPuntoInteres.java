@@ -1,9 +1,14 @@
 package Logica;
 
+import Dato.RepositorioPuntoArreglo;
 import Logica.Excepciones.CodigoDuplicadoException;
 import Logica.Excepciones.RepositorioLlenoException;
 import Logica.Excepciones.RepositorioVacioException;
 import Dato.RepositorioPuntoInteres;
+import Logica.Arbol.ArbolABB;
+import Logica.Arbol.NodoABB;
+import Logica.Excepciones.ArbolVacioException;
+import Logica.PuntoInteres.Mirador;
 import Logica.PuntoInteres.PuntoInteres;
 
 /**
@@ -12,13 +17,20 @@ import Logica.PuntoInteres.PuntoInteres;
  */
 public class GestorPuntoInteres {
 
-    private final RepositorioPuntoInteres repositorio;
+    private  RepositorioPuntoInteres repositorio;
+    private  ArbolABB<PuntoInteres> arbol;
+    private GrafoSendero grafo;
 
+    public GestorPuntoInteres() {
+        this.repositorio = new RepositorioPuntoArreglo();
+        this.arbol = new ArbolABB<PuntoInteres>();
+        this.grafo = new GrafoSendero();
 
-  public GestorPuntoInteres(RepositorioPuntoInteres repositorio) {
-    this.repositorio = repositorio;
+    }
+    // ================================================================================================================= //
+    // ===========================================  Metodos con repositorio  =========================================== //
+    // ================================================================================================================= //
 
-}
     /*func.1
 valida la duplicidad y agrega
      */
@@ -27,16 +39,10 @@ valida la duplicidad y agrega
             throw new CodigoDuplicadoException("el codigo " + nuevoPunto.getCodigo() + "inrgresado ya exsite");
         }
         repositorio.agregar(nuevoPunto);
-       
 
     }
 
-    //metodo de construir para delegar al arbol
-    public void construirIndice() {
-        estaVacio();
-
-    }
-
+ 
     public boolean exsiteCodigo(int codigo) {
         return repositorio.existeCodigo(codigo);
     }
@@ -73,7 +79,7 @@ valida la duplicidad y agrega
     }
 
     //func 3. busca un puntode interes por codigo usando la busqueda recursiva del repo
-    public PuntoInteres buscarPorCodigo(int codigo) {
+    public PuntoInteres buscarCodigo(int codigo) {
         return repositorio.buscarPorCodigo(codigo);
     }
 
@@ -147,5 +153,68 @@ valida la duplicidad y agrega
         }
         return cuenta + contarAccesAltaRecursivo(posicion + 1);//retorna la cuenta de puntos 
     }
+    // ================================================================================================================= //
+    // ==============================================  Metodos con arbol  ============================================== //
+    // ================================================================================================================= //
+    public void validarArbolNoVacio() throws ArbolVacioException{
+        if (arbol.estaVacio()) {
+            throw new ArbolVacioException("no hay puntos deinteres guardados en el arbol");
+            
+        }
+    }
+    
+    //func Reconstruir Indice 
+    /*recostruye el indice del arbol a partir de todos los puntos almacendaso 
+    en el repositorio
+    */
+    
+    public void construirIndice(){
+        estaVacio();
+        arbol = new ArbolABB<PuntoInteres>();
+        for (int i = 0; i < repositorio.cantidad(); i++) {
+            arbol.insertar(repositorio.obtener(i));
+        }
+    }
+    
+    
+    //func mostrar inORden
+     public void mostrarInOrden() throws ArbolVacioException{
+        validarArbolNoVacio();
+        mostrarInOrdenRecursivo(arbol.getRaiz());
+    }
+    
+    private void mostrarInOrdenRecursivo(NodoABB<PuntoInteres> nodo){
+        if (nodo != null) {
+            mostrarInOrdenRecursivo(nodo.getPi());
+            
+            PuntoInteres p = nodo.getDato();
+            
+            p.mostrarInformacion();
+            
+            mostrarInOrdenRecursivo(nodo.getPd());
+        }
+    }
+    //func Buscar Punto interes por Codigo 
+      public PuntoInteres buscarPorCodigo(int codigo) {
+        return arbol.buscar(new Mirador(codigo));
+    }
+      
+   //func Eliminar un Punto de Interes por codigo
+    
+    public PuntoInteres eliminarPorCodigo(int codigo){
+        PuntoInteres p = buscarPorCodigo(codigo);
+        if (p != null) {
+            arbol.eliminar(p);
+        }
+        
+        return p;
+    }    
+   
+   //Retornar las estadisticas del Arbol
+    
+    public int[] getEstadistica(){
+        return arbol.getEstadistica();
+    }
 
+    
 }

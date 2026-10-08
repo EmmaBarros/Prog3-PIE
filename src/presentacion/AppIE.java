@@ -31,7 +31,7 @@ public class AppIE {
          //se crea el gestor del arbol (el indice)
 
         //se inyecta la dependencia desde la capa de logica 
-        this.gestor = new GestorPuntoInteres(repositorio);
+        this.gestor = new GestorPuntoInteres();
         //se prepara el menu 
         this.menuEcRou = new MenuEcuRoute();
         this.menuEcRou.cargar();
